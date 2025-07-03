@@ -23,9 +23,13 @@
 ## 3. 容器工作目录
 
 事先准备：安装配置`Docker`与`Vscode`。
+
 进入`doc_ml_env`目录构建容器：
+
 在`Vscode`中按下`Ctrl + Shift + P`进入命令面板，点击`Dev Containers:Reopen in Container`构建容器。
+
 构建完成后，与`doc_ml_env`同级的所有目录都在`\workspaces`中，可根据需要自行添加其他项目目录。
+
 进入`\workspaces\doc_ml_env`目录，运行`python test.py`可以验证`Pytorch`的安装与显卡情况。
   
 ## 4. 项目结构
