@@ -61,3 +61,27 @@ workspaces
 ```
 
 - 这样，通过当前工作区进入容器后，通过code命令即可打开其他项目目录
+
+## 6. 容器构建参数
+
+- 通过`.devcontainer/devcontainer.json`配置。
+  - name：容器名
+  - image：镜像名与标签
+  - runArgs：运行容器的参数
+    - shm-size：共享内存大小，根据算力设置
+  - build：构建镜像的配置
+    - context：构建容器的上下文（.devcontainer 目录的父目录）
+    - dockerfile：指定构建容器的 Dockerfile
+    - args：构建镜像的参数
+      - IMAGE_NAME：指定镜像名称
+      - IMAGE_TAG：指定镜像标签，其中指定了 Linux OS 的发行版、G++、Anaconda、Pytorch 等依赖工具的版本
+      - ANACONDA_FILE：指定anaconda安装包
+      - BASE_IMAGE_TAG：基础镜像标签参数
+  - mounts：挂载本地目录
+  - customizations
+    - vscode
+      - extensions：安装容器中需要的 Vscode 扩展
+
+- 两个重要的参数：
+  - ANACONDA_FILE：`anaconda`的`shell`安装脚本，需要配置到项目目录下的`install`目录中
+  - BASE_IMAGE_TAG：基础镜像`nvdia/cuda`的标签，其中指定了 Linux OS 的发行版、cuDNN、CUDA 等依赖工具的版本
