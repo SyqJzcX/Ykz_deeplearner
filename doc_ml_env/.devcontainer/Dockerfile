@@ -21,11 +21,12 @@ ENV http_proxy=${PROXY_URL} \
 
 # 设置代理证书文件名（如果需要）
 ARG PROXY_CRT=steamcrt.cer
-# 如果需要代理证书复制到容器中
+# 将代理证书复制到容器中
 COPY ${PROXY_CRT} /usr/local/share/ca-certificates/${PROXY_CRT}.crt
 # 安装 ca-certificates
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
+    # 包含 SSL 证书，用于验证 HTTPS 连接的安全性
     ca-certificates && \
     # 更新 CA 证书
     update-ca-certificates
@@ -50,9 +51,7 @@ RUN apt-get update -qq && \
     curl \
     iproute2 \
     # 通过 URL 获取安装脚本
-    wget \
-    # 包含 SSL 证书，用于验证 HTTPS 连接的安全性
-    ca-certificates && \
+    wget && \
     # 添加 deadsnakes PPA：允许安装最新的 Python 版本（如 3.11），同时保留系统 Python 3.8
     # add-apt-repository ppa:deadsnakes/ppa -y && \
     # 清理软件源索引缓存与已下载的安装包文件，减小镜像体积
